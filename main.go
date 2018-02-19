@@ -17,10 +17,6 @@ const (
 	dbname   = ""
 )
 
-func homeHandler(w http.ResponseWriter, r *http.Request) {
-	http.ServeFile(w, r, fmt.Sprintf("./%s/index.htm", "static"))
-}
-
 func main() {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",

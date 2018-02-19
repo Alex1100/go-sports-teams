@@ -117,17 +117,18 @@ const loginUser = (creds, history) => {
 
   return (dispatch) => {
     dispatch(requestLogin(creds.username));
-    return axios.get(`http://localhost:3010/api/login`, axiosBod)
+    return axios.post(`http://localhost:3010/api/login`, axiosBod)
       .then(response => {
-        // if(!response.data.token){
-        //   dispatch(loginError('Bad Request...'));
-        //   return Promise.reject(response);
-        // }
-        console.log("RESPONSE IS: ", response.data);
-        localStorage.setItem('token', response.data.username);
-        const username = response.data.user.username;
-        const favorite_teams = response.data.user.favorite_teams;
-        const userId = response.data.user.id;
+        response.data = JSON.parse(response.data);
+        if(!response.data.FavoriteTeams){
+          dispatch(loginError('Bad Request...'));
+          return Promise.reject(response);
+        }
+
+        localStorage.setItem('token', response.data.Username);
+        const username = response.data.Username;
+        const favorite_teams = response.data.FavoriteTeams;
+        const userId = response.data.Id;
         const user = { userId, username, favorite_teams };
 
         grabAllTeams(dispatch);

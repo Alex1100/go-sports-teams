@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "133744de1f1d666c5d13"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "3b0ee1177be083d06aaa"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -74393,16 +74393,17 @@ var loginUser = function loginUser(creds, history) {
 
   return function (dispatch) {
     dispatch(requestLogin(creds.username));
-    return _axios2.default.get('http://localhost:3010/api/login', axiosBod).then(function (response) {
-      // if(!response.data.token){
-      //   dispatch(loginError('Bad Request...'));
-      //   return Promise.reject(response);
-      // }
-      console.log("RESPONSE IS: ", response.data);
-      localStorage.setItem('token', response.data.username);
-      var username = response.data.user.username;
-      var favorite_teams = response.data.user.favorite_teams;
-      var userId = response.data.user.id;
+    return _axios2.default.post('http://localhost:3010/api/login', axiosBod).then(function (response) {
+      response.data = JSON.parse(response.data);
+      if (!response.data.FavoriteTeams) {
+        dispatch(loginError('Bad Request...'));
+        return Promise.reject(response);
+      }
+
+      localStorage.setItem('token', response.data.Username);
+      var username = response.data.Username;
+      var favorite_teams = response.data.FavoriteTeams;
+      var userId = response.data.Id;
       var user = { userId: userId, username: username, favorite_teams: favorite_teams };
 
       grabAllTeams(dispatch);

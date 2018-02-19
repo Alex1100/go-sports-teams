@@ -10,11 +10,11 @@ import (
 )
 
 const (
-	host     = ""
+	host     = "baasu.db.elephantsql.com"
 	port     = 5432
-	user     = ""
-	password = ""
-	dbname   = ""
+	user     = "kznthyeb"
+	password = "raY8OEFmBfOjmMCOK-i2CzdsTJQ6TOqj"
+	dbname   = "kznthyeb"
 )
 
 func main() {
@@ -38,11 +38,11 @@ func main() {
 	mux.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 	http.Handle("/", mux)
 
-	mux.Handle("/api/signup", routes.Signup).methods("POST")
 	mux.HandleFunc("/api/login", routes.Login).Methods("GET")
-	mux.Handle("/api/sports", routes.GetSports).methods("GET")
-	mux.Handle("/api/teams", routes.GetTeams).methods("GET")
-	mux.Handle("/api/toggle-favorite-team", routes.ToggleTeams).methods("PUT")
+	// mux.Handle("/api/signup", routes.Signup).methods("POST")
+	// mux.Handle("/api/sports", routes.GetSports).methods("GET")
+	// mux.Handle("/api/teams", routes.GetTeams).methods("GET")
+	// mux.Handle("/api/toggle-favorite-team", routes.ToggleTeams).methods("PUT")
 
 	fmt.Println(http.ListenAndServe(":3010", nil))
 }

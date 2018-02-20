@@ -9,14 +9,6 @@ import (
 	"net/http"
 )
 
-const (
-	host     = "baasu.db.elephantsql.com"
-	port     = 5432
-	user     = "kznthyeb"
-	password = "raY8OEFmBfOjmMCOK-i2CzdsTJQ6TOqj"
-	dbname   = "kznthyeb"
-)
-
 func main() {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
@@ -38,8 +30,8 @@ func main() {
 	mux.HandleFunc("/api/login", routes.Login).Methods("POST")
 	mux.HandleFunc("/api/signup", routes.Signup).Methods("POST")
 	mux.HandleFunc("/api/teams", routes.GetTeams).Methods("GET")
+	// mux.HandleFunc("/api/toggle-favorite-team", routes.ToggleTeams).methods("PUT")
 	// mux.Handle("/api/sports", routes.GetSports).methods("GET")
-	// mux.Handle("/api/toggle-favorite-team", routes.ToggleTeams).methods("PUT")
 	mux.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 	http.Handle("/", mux)
 

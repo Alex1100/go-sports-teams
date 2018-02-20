@@ -132,6 +132,7 @@ const loginUser = (creds, history) => {
 
         localStorage.setItem('token', response.data.Username);
         const username = response.data.Username;
+        response.data.FavoriteTeams = response.data.FavoriteTeams.filter((el, i) => i !== 0 && i !== response.data.FavoriteTeams.length - 1)
         const favorite_teams = response.data.FavoriteTeams;
         const userId = response.data.Id;
         const user = { userId, username, favorite_teams };
@@ -157,20 +158,23 @@ const signupUser = (creds, history) => {
     dispatch(requestLogin(creds));
     return axios.post('/api/signup', axiosBod)
       .then(response => {
-        if (!response.data.token) {
+        console.log("RESP IS: ", response.data);
+        response.data = JSON.parse(response.data);
+        if (!response.data.FavoriteTeams) {
           dispatch(loginError('Bad Request...'));
           return Promise.reject(response);
         }
 
-        localStorage.setItem('token', response.data.username);
-        const username = response.data.user.username;
-        const favorite_teams = response.data.user.favorite_teams;
-        const userId = response.data.user.id;
+        localStorage.setItem('token', response.data.Username);
+        const username = response.data.Username;
+        response.data.FavoriteTeams = response.data.FavoriteTeams.filter((el, i) => i !== 0 && i !== response.data.FavoriteTeams.length - 1)
+        const favorite_teams = response.data.FavoriteTeams;
+        const userId = response.data.Id;
         const user = { userId, username, favorite_teams };
 
         grabAllTeams(dispatch);
         dispatch(receiveLogin(user));
-        history.push("/");
+        history.push('/');
       })
       .catch(err => {
         console.log("Error: ", err);

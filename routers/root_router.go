@@ -2,10 +2,8 @@ package routers
 
 import (
 	"database/sql"
-	"encoding/json"
 	_ "github.com/lib/pq"
 	"go-sports-teams/controllers"
-	"io/ioutil"
 	"net/http"
 )
 
@@ -18,27 +16,15 @@ func ExposeDB(db *sql.DB) *DataBase {
 }
 
 func (database *DataBase) Login(w http.ResponseWriter, r *http.Request) {
-	body, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		http.Error(w, "can't read body", http.StatusBadRequest)
-		return
-	}
+	controllers.ExtendDBUsers(database.db).LoginUser(w, r)
+}
 
-	req_params := make(map[string]string)
-	e := json.Unmarshal(body, &req_params)
-	if e != nil {
-		panic(e)
-	}
-	req_keys := make([]string, len(req_params))
-	i := 0
-	for _, v := range req_params {
-		req_keys[i] = v
-		i++
-	}
+func (database *DataBase) Signup(w http.ResponseWriter, r *http.Request) {
+	controllers.ExtendDBUsers(database.db).SignupUser(w, r)
+}
 
-	ctrl := controllers.ExtendDBUsers(database.db)
-
-	ctrl.LoginUser(req_keys[0], req_keys[1], w)
+func (database *DataBase) ToggleTeam(w http.ResponseWriter, r *http.Request) {
+	controllers.ExtendDBUsers(database.db).ToggleFavTeam(w, r)
 }
 
 func (database *DataBase) GetTeams(w http.ResponseWriter, r *http.Request) {

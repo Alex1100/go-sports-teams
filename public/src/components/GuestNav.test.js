@@ -13,4 +13,12 @@ describe("GuestNav", () => {
   it("renders the Action-Network text in h1 tag", () => {
     expect(gNav.find('Link h1').text()).toEqual("Action-Network");
   });
+
+  it("renders the Login Link", () => {
+    expect(gNav.find('Link').at(1).props().children).toEqual("Login");
+  });
+
+  it("renders the Signup Link", () => {
+    expect(gNav.find('Link').at(2).props().children).toEqual("Signup");
+  });
 });

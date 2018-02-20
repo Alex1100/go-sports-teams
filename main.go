@@ -37,8 +37,8 @@ func main() {
 
 	mux.HandleFunc("/api/login", routes.Login).Methods("POST")
 	// mux.Handle("/api/signup", routes.Signup).methods("POST")
+	mux.HandleFunc("/api/teams", routes.GetTeams).Methods("GET")
 	// mux.Handle("/api/sports", routes.GetSports).methods("GET")
-	// mux.Handle("/api/teams", routes.GetTeams).methods("GET")
 	// mux.Handle("/api/toggle-favorite-team", routes.ToggleTeams).methods("PUT")
 	mux.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 	http.Handle("/", mux)

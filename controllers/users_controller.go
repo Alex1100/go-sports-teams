@@ -21,7 +21,7 @@ type UserResponse struct {
 	FavoriteTeams JSONableSlice
 }
 
-func ExtendDB(db *sql.DB) *DataBase {
+func ExtendDBUsers(db *sql.DB) *DataBase {
 	return &DataBase{db: db}
 }
 
@@ -30,7 +30,7 @@ func (u JSONableSlice) MarshalJSON() ([]byte, error) {
 	if u == nil {
 		result = "null"
 	} else {
-		result = strings.Join(strings.Fields(fmt.Sprintf("%d", u)), ",")
+		result = strings.Join(strings.Fields(fmt.Sprintf("\n%d", u)), ",")
 	}
 	return []byte(result), nil
 }

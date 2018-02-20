@@ -109,7 +109,7 @@ class SearchContainer extends Component {
             placeholder="Find Teams"
             onChange={(e) => this.handleSearchInput(e)}
           />
-          <span class="glyphicon glyphicon-search"></span>
+          <span className="glyphicon glyphicon-search"></span>
         </div>
         <div className="search-results-container">
            {
@@ -276,7 +276,7 @@ class SearchContainer extends Component {
             placeholder="Find Teams"
             onChange={(e) => this.handleSearchInput(e)}
           />
-          <span class="glyphicon glyphicon-search"></span>
+          <span className="glyphicon glyphicon-search"></span>
         </div>
         <div className="search-results-container">
            {
@@ -443,7 +443,7 @@ class SearchContainer extends Component {
             placeholder="Find Teams"
             onChange={(e) => this.handleSearchInput(e)}
           />
-          <span class="glyphicon glyphicon-search"></span>
+          <span className="glyphicon glyphicon-search"></span>
         </div>
         <div className="search-results-container">
            <div className="no-results-container">

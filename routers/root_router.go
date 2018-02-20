@@ -36,7 +36,11 @@ func (database *DataBase) Login(w http.ResponseWriter, r *http.Request) {
 		i++
 	}
 
-	ctrl := controllers.ExtendDB(database.db)
+	ctrl := controllers.ExtendDBUsers(database.db)
 
 	ctrl.LoginUser(req_keys[0], req_keys[1], w)
+}
+
+func (database *DataBase) GetTeams(w http.ResponseWriter, r *http.Request) {
+	controllers.ExtendDBTeams(database.db).GetTeams(w, r)
 }

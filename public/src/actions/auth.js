@@ -96,11 +96,16 @@ const grabAllTeams = (dispatch) => {
 
   const token = localStorage.getItem("token");
 
-  return axios.get(`http://localhost:3010/api/teams`)
+  return axios.get(`/api/teams`)
     .then(response => {
+      response.data = JSON.parse(response.data);
       if(!response.data) {
         dispatch(failedToGrabAllTopics());
         return Promise.reject(response);
+      }
+
+      for(let i = 0; i < response.data.length; i++) {
+        response.data[i].sports_id = response.data[i].sports_id.toString();
       }
 
       dispatch(grabAllTeamsSuccess(response.data));
@@ -117,7 +122,7 @@ const loginUser = (creds, history) => {
 
   return (dispatch) => {
     dispatch(requestLogin(creds.username));
-    return axios.post(`http://localhost:3010/api/login`, axiosBod)
+    return axios.post(`/api/login`, axiosBod)
       .then(response => {
         response.data = JSON.parse(response.data);
         if(!response.data.FavoriteTeams){
@@ -150,7 +155,7 @@ const signupUser = (creds, history) => {
 
   return (dispatch) => {
     dispatch(requestLogin(creds));
-    return axios.post('http://localhost:3010/api/signup', axiosBod)
+    return axios.post('/api/signup', axiosBod)
       .then(response => {
         if (!response.data.token) {
           dispatch(loginError('Bad Request...'));

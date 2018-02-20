@@ -20,10 +20,6 @@ const showNoResults = (message) => ({
   message
 });
 
-// const filterEverythingAlex = (searchTerm, teams) => {
-//   return teams.filter()
-// }
-
 
 const updateSearchTerm = (term, teams, sport) => (dispatch) => {
   let searchTerm = term.toUpperCase();

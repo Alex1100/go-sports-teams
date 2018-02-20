@@ -9,6 +9,14 @@ import (
 	"net/http"
 )
 
+const (
+	host     = "baasu.db.elephantsql.com"
+	port     = 5432
+	user     = "kznthyeb"
+	password = "raY8OEFmBfOjmMCOK-i2CzdsTJQ6TOqj"
+	dbname   = "kznthyeb"
+)
+
 func main() {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",

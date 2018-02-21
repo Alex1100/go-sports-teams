@@ -21,4 +21,8 @@ describe("GuestNav", () => {
   it("renders the Signup Link", () => {
     expect(gNav.find('Link').at(2).props().children).toEqual("Signup");
   });
+
+  it("tests to see if NavItem className guest-signup is present on Signup Link", () => {
+    expect(gNav.find('NavItem').at(2).hasClass("guest-signup")).toBe(true);
+  });
 });

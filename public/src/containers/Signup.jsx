@@ -17,7 +17,7 @@ import {
 } from 'react-redux';
 
 
-class Signup extends Component {
+export class Signup extends Component {
   constructor(props) {
     super(props);
 

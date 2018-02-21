@@ -22,7 +22,7 @@ import {
 } from '../actions/team';
 
 
-class SearchContainer extends Component {
+export class SearchContainer extends Component {
   constructor(props) {
     super(props);
 

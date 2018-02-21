@@ -24,7 +24,7 @@ import Signup from './Signup';
 import SearchContainer from './SearchContainer';
 
 
-class Router extends Component {
+export class Router extends Component {
 
   render() {
     const {
